@@ -1,3 +1,4 @@
+
 terraform {
   required_providers {
     aws = {
@@ -15,6 +16,8 @@ resource "random_pet" "petname" {
   separator = "-"
 }
 
+
+/*
 resource "aws_s3_bucket" "dev" {
   bucket = "${var.dev_prefix}-${random_pet.petname.id}"
   acl    = "public-read"
@@ -54,7 +57,7 @@ resource "aws_s3_bucket_object" "dev" {
   content_type = "text/html"
 
 }
-
+*/
 resource "aws_s3_bucket" "prod" {
   bucket = "${var.prod_prefix}-${random_pet.petname.id}"
   acl    = "public-read"
@@ -90,7 +93,7 @@ resource "aws_s3_bucket_object" "prod" {
   acl          = "public-read"
   key          = "index.html"
   bucket       = aws_s3_bucket.prod.id
-  content      = file("${path.module}/assets/index.html")
+  content      = file("${path.module}/../assets/index.html")
   content_type = "text/html"
 
 }
